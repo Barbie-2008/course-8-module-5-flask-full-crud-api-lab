@@ -171,3 +171,81 @@ After completing this lab, you will:
 ✅ Return proper HTTP status codes and structured responses  
 
 This is a critical step in your backend developer journey. Next up: persistent databases!
+
+
+# Flask Full CRUD RESTful API - Events Manager
+
+## Purpose
+This project is a RESTful API built with Flask designed to manage event resources. It demonstrates full CRUD (Create, Read, Update, Delete) functionality using in-memory Python objects to simulate persistent storage. The API enforces standard RESTful conventions, parses incoming JSON payloads, performs input validation, and returns structured JSON responses alongside appropriate HTTP status codes.
+
+---
+
+## API Routes Overview
+
+| Method | Endpoint | Description | Expected Status |
+| :--- | :--- | :--- | :--- |
+| **GET** | `/events` | Retrieve a list of all events | `200 OK` |
+| **GET** | `/events/<id>` | Retrieve a single event by ID | `200 OK` / `404 Not Found` |
+| **POST** | `/events` | Create a new event | `201 Created` / `400 Bad Request` |
+| **PATCH** | `/events/<id>` | Update an existing event's title | `200 OK` / `400 Bad Request` / `404 Not Found` |
+| **DELETE** | `/events/<id>` | Remove an event from the store | `204 No Content` / `404 Not Found` |
+
+---
+
+## Example Requests & Responses
+
+### 1. Get All Events
+- **Request:** `GET http://localhost:5000/events`
+- **Response:** `200 OK`
+```json
+[
+  {
+    "id": 1,
+    "title": "Tech Meetup"
+  },
+  {
+    "id": 2,
+    "title": "Python Workshop"
+  }
+]
+
+2. Create an Event
+Request: POST http://localhost:5000/events
+
+Headers: Content-Type: application/json
+
+Body:
+
+JSON
+{
+  "title": "Hackathon"
+}
+Response: 201 Created
+
+JSON
+{
+  "id": 3,
+  "title": "Hackathon"
+}
+3. Update an Event
+Request: PATCH http://localhost:5000/events/1
+
+Headers: Content-Type: application/json
+
+Body:
+
+JSON
+{
+  "title": "Hackathon 2025"
+}
+Response: 200 OK
+
+JSON
+{
+  "id": 1,
+  "title": "Hackathon 2025"
+}
+4. Delete an Event
+Request: DELETE http://localhost:5000/events/2
+
+Response: 204 No Content (Empty body)
